@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 from webapp.forms import CommentForm
@@ -47,3 +48,4 @@ class CommentDeleteView(UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('webapp:article_view', kwargs={'pk': self.object.article.pk })
+

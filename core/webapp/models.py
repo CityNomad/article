@@ -23,6 +23,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
     tags = models.ManyToManyField('webapp.Tag', related_name='articles', blank=True)
+    likes = models.ManyToManyField(get_user_model(), related_name="likes", blank=True)
 
     class Meta:
         permissions = [
