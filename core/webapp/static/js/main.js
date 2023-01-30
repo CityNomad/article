@@ -32,6 +32,7 @@ async function addLike(event){
         p.innerText = `Total likes ${count}`;
     }
     catch (error){
+        console.log("Impossible to add like")
         onError(error);
     }
 }
@@ -48,6 +49,7 @@ async function addLikeComment(event){
         checkText(text);
     }
     catch (error){
+        console.log("Impossible to add like")
         onError(error);
     }
 }
