@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
@@ -6,6 +7,18 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from webapp.forms import CommentForm
 from webapp.models import Comment, Article
+
+
+class LikeCommentView(LoginRequiredMixin, View):
+    def get(self, request, *args, pk, **kwargs):
+        comment = Comment.objects.get(pk=pk)
+        user = self.request.user
+        if user in comment.favourite.all():
+            comment.favourite.remove(user)
+        else:
+            comment.favourite.add(user)
+
+        return JsonResponse({"count": comment.favourite.count()})
 
 
 class ArticleCommentCreateView(LoginRequiredMixin, CreateView):
