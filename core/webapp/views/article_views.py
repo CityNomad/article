@@ -112,7 +112,7 @@ class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'article/article_delete.html'
     model = Article
     context_object_name = 'article'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('webapp:index')
     form_class = ArticleDeleteForm
     permission_required = 'webapp.delete_article'
 

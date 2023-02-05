@@ -37,17 +37,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['text']
 
-class ArticleDeleteForm(forms.ModelForm):
-    class Meta:
-        model = Article
-        fields = ['title']
-
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if self.instance.title != title:
-            raise ValidationError('Названия не совпадают')
-        return title
-
 
 class ArticleDeleteForm(forms.ModelForm):
     class Meta:
